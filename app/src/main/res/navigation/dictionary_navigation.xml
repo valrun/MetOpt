@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dictionary_navigation"
+    app:startDestination="@id/dictionaryFragment"
+    tools:ignore="UnusedNavigation">
+<fragment
+    android:id="@+id/dictionaryFragment"
+    android:name="com.example.metopt.fragments.DictionaryFragment"
+    android:label="DictionaryFragment"
+    tools:layout="@layout/fragment_dictionary">
+    <action
+        android:id="@+id/action_dictionary_to_new"
+        app:destination="@id/dictionaryFragment"
+        />
+    <argument
+        android:name="count"
+        android:defaultValue="0"
+        app:argType="string"
+        />
+    </fragment>
+</navigation>

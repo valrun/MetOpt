@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/brents_navigation"
+        android:title="Brents"
+        android:icon="@mipmap/ic_launcher"/>
+    <item
+        android:id="@+id/dictionary_navigation"
+        android:title="Dictionary"
+        android:icon="@mipmap/ic_launcher"/>
+    <item
+        android:id="@+id/chat_navigation"
+        android:title="Chat"
+        android:icon="@mipmap/ic_launcher"/>
+</menu>

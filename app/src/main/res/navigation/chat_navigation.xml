@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_navigation"
+    app:startDestination="@id/chatFragment"
+    tools:ignore="UnusedNavigation">
+<fragment
+    android:id="@+id/chatFragment"
+    android:name="com.example.metopt.fragments.ChatFragment"
+    android:label="ChatFragment"
+    tools:layout="@layout/fragment_chat">
+    <action
+        android:id="@+id/action_char_to_new"
+        app:destination="@id/chatFragment"
+        />
+    <argument
+        android:name="count"
+        android:defaultValue="0"
+        app:argType="string"
+        />
+    </fragment>
+</navigation>
