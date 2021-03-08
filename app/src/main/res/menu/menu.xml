@@ -3,21 +3,21 @@
     <item
         android:id="@+id/brents_navigation"
         android:title="Brents"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/letter_b" />
     <item
         android:id="@+id/dichotomy_navigation"
         android:title="Dichotomy"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/letter_d"/>
     <item
         android:id="@+id/Fibonacci_navigation"
         android:title="Fibonacci"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/letter_f"/>
     <item
         android:id="@+id/Golden_navigation"
         android:title="Golden Ration"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/letter_g"/>
     <item
         android:id="@+id/Parabolic_navigation"
         android:title="Parabolic"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/letter_p"/>
 </menu>
