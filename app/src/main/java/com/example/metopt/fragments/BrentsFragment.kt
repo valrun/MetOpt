@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.android.navigationadvancedsample.navigate
 import com.example.metopt.R
-import com.example.metopt.methods.DichotomyMethod
+import com.example.metopt.methods.BrentsMethods
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import kotlinx.android.synthetic.main.fragment_brents.*
 import kotlinx.android.synthetic.main.fragment_brents.view.*
 import kotlin.math.exp
 import kotlin.math.pow
@@ -38,9 +36,9 @@ class BrentsFragment : Fragment() {
 
         val graph = view.graph as GraphView
         val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>(
-            PointsOfMethods().getArray(DichotomyMethod { x: Double ->
+            PointsOfMethods().getArray(BrentsMethods { x: Double ->
                 x.pow(2.0) + exp(-0.35 * x)
-            } )
+            })
         )
         graph.addSeries(series)
 

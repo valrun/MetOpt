@@ -17,7 +17,7 @@ public class FibonacciMethod extends AbstractMethod {
 
     int s = -1;
 
-    FibonacciMethod(Function<Double, Double> fun) {
+    public FibonacciMethod(Function<Double, Double> fun) {
         super(fun, "Fibonacci");
     }
 

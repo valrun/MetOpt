@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.metopt.R
-import com.example.metopt.methods.DichotomyMethod
+import com.example.metopt.methods.ParabolicMethod
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import kotlinx.android.synthetic.main.fragment_dichotomy.view.graph
+import kotlinx.android.synthetic.main.fragment_parabolic.view.graph
 import kotlin.math.exp
 import kotlin.math.pow
 
-class dichotomyFragment  : Fragment() {
+class ParabolicFragment : Fragment() {
     private var countValue = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +28,13 @@ class dichotomyFragment  : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_dichotomy, container, false)
+        val view = inflater.inflate(R.layout.fragment_parabolic, container, false)
 
         val graph = view.graph as GraphView
         val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>(
-            PointsOfMethods().getArray(DichotomyMethod { x: Double ->
+            PointsOfMethods().getArray(ParabolicMethod { x: Double ->
                 x.pow(2.0) + exp(-0.35 * x)
-            } )
+            })
         )
         graph.addSeries(series)
 
@@ -43,7 +43,7 @@ class dichotomyFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val temp = dichotomyFragmentArgs.fromBundle(requireArguments()).count
+        val temp = ParabolicFragmentArgs.fromBundle(requireArguments()).count
         //homeCount.text = temp
         countValue = temp.toInt()
     }

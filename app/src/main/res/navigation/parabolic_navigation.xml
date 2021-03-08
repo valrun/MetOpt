@@ -2,17 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dictionary_navigation"
-    app:startDestination="@id/dictionaryFragment"
+    android:id="@+id/Parabolic_navigation"
+    app:startDestination="@id/ParabolicFragment"
     tools:ignore="UnusedNavigation">
 <fragment
-    android:id="@+id/dictionaryFragment"
-    android:name="com.example.metopt.fragments.DictionaryFragment"
-    android:label="DictionaryFragment"
-    tools:layout="@layout/fragment_dictionary">
+    android:id="@+id/ParabolicFragment"
+    android:name="com.example.metopt.fragments.ParabolicFragment"
+    android:label="ParabolicFragment"
+    tools:layout="@layout/fragment_parabolic">
     <action
-        android:id="@+id/action_dictionary_to_new"
-        app:destination="@id/dictionaryFragment"
+        android:id="@+id/action_gold_to_new"
+        app:destination="@id/ParabolicFragment"
         />
     <argument
         android:name="count"

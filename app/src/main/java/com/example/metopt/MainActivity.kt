@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import com.example.android.navigationadvancedsample.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class MainActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -33,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         val navGraphIds = listOf(
             R.navigation.brents_navigation,
-            R.navigation.dictionary_navigation,
-            R.navigation.chat_navigation
+            R.navigation.dichotomy_navigation,
+            R.navigation.fibonacci_navigation,
+            R.navigation.golden_navigation,
+            R.navigation.parabolic_navigation
         )
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,

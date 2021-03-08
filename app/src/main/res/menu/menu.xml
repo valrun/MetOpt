@@ -5,11 +5,19 @@
         android:title="Brents"
         android:icon="@mipmap/ic_launcher"/>
     <item
-        android:id="@+id/dictionary_navigation"
-        android:title="Dictionary"
+        android:id="@+id/dichotomy_navigation"
+        android:title="Dichotomy"
         android:icon="@mipmap/ic_launcher"/>
     <item
-        android:id="@+id/chat_navigation"
-        android:title="Chat"
+        android:id="@+id/Fibonacci_navigation"
+        android:title="Fibonacci"
+        android:icon="@mipmap/ic_launcher"/>
+    <item
+        android:id="@+id/Golden_navigation"
+        android:title="Golden Ration"
+        android:icon="@mipmap/ic_launcher"/>
+    <item
+        android:id="@+id/Parabolic_navigation"
+        android:title="Parabolic"
         android:icon="@mipmap/ic_launcher"/>
 </menu>

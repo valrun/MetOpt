@@ -2,17 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chat_navigation"
-    app:startDestination="@id/chatFragment"
+    android:id="@+id/dichotomy_navigation"
+    app:startDestination="@id/dichotomyFragment"
     tools:ignore="UnusedNavigation">
 <fragment
-    android:id="@+id/chatFragment"
-    android:name="com.example.metopt.fragments.ChatFragment"
-    android:label="ChatFragment"
-    tools:layout="@layout/fragment_chat">
+    android:id="@+id/dichotomyFragment"
+    android:name="com.example.metopt.fragments.dichotomyFragment"
+    android:label="dichotomyFragment"
+    tools:layout="@layout/fragment_dichotomy">
     <action
-        android:id="@+id/action_char_to_new"
-        app:destination="@id/chatFragment"
+        android:id="@+id/action_dichotomy_to_new"
+        app:destination="@id/dichotomyFragment"
         />
     <argument
         android:name="count"

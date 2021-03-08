@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class GoldenRatioMethod extends AbstractMethod {
 
-    GoldenRatioMethod(Function<Double, Double> fun) {
+    public GoldenRatioMethod(Function<Double, Double> fun) {
         super(fun, "Golden Ratio");
     }
 

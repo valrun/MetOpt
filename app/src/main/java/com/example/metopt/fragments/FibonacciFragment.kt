@@ -6,25 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.metopt.R
 import androidx.fragment.app.Fragment
-import com.example.android.navigationadvancedsample.navigate
-import com.example.metopt.methods.BrentsMethods
+import com.example.metopt.methods.FibonacciMethod
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import kotlinx.android.synthetic.main.fragment_chat.*
-import kotlinx.android.synthetic.main.fragment_chat.view.*
+import kotlinx.android.synthetic.main.fragment_fibonacci.view.*
 import kotlin.math.exp
 import kotlin.math.pow
 
-class ChatFragment  : Fragment() {
-    private var chatCountNum = 0;
+class FibonacciFragment : Fragment() {
+    private var FibonacciCountNum = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-        /*if (chatCount != null) {
-            chatCount.text = (chatCountNum).toString()
+        /*if (FibonacciCount != null) {
+            FibonacciCount.text = (FibonacciCountNum).toString()
         }*/
     }
 
@@ -33,19 +31,17 @@ class ChatFragment  : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /*if (chatCount != null) {
-            chatCount.text = (chatCountNum).toString()
+        /*if (FibonacciCount != null) {
+            FibonacciCount.text = (FibonacciCountNum).toString()
         }*/
-        val view = inflater.inflate(R.layout.fragment_chat, container, false)
-        view.chatButton.setOnClickListener {
-            navigate(ChatFragmentDirections.actionCharToNew((chatCountNum + 1).toString()))
-        }
+        val view = inflater.inflate(R.layout.fragment_fibonacci, container, false)
 
-        val graph = view.graphChat as GraphView
+
+        val graph = view.graph as GraphView
         val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>(
-            PointsOfMethods().getArray(BrentsMethods { x: Double ->
+            PointsOfMethods().getArray(FibonacciMethod { x: Double ->
                 x.pow(2.0) + exp(-0.35 * x)
-            } )
+            })
         )
         graph.addSeries(series)
 
@@ -54,14 +50,14 @@ class ChatFragment  : Fragment() {
 
     /*
     fun countClick(view: View) {
-        val chatCountNum = chatCount.text as Int
-        chatCount.text = (chatCountNum + 1).toString()
+        val FibonacciCountNum = FibonacciCount.text as Int
+        FibonacciCount.text = (FibonacciCountNum + 1).toString()
     }
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val temp = ChatFragmentArgs.fromBundle(requireArguments()).count
-        chatCount.text = temp
-        chatCountNum = temp.toInt()
+        val temp = FibonacciFragmentArgs.fromBundle(requireArguments()).count
+        //FibonacciCount.text = temp
+        FibonacciCountNum = temp.toInt()
     }
 }

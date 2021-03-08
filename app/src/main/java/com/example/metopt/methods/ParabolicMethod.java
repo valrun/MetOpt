@@ -10,7 +10,7 @@ public class ParabolicMethod extends AbstractMethod {
 
     double fl, fr, x, fx;
 
-    ParabolicMethod(Function<Double, Double> fun) {
+    public ParabolicMethod(Function<Double, Double> fun) {
         super(fun, "Parabolic");
     }
 
