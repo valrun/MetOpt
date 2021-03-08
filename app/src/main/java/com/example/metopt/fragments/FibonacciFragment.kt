@@ -1,10 +1,13 @@
 package com.example.metopt.fragments
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.metopt.R
 import androidx.fragment.app.Fragment
 import com.example.metopt.methods.DichotomyMethod
@@ -31,6 +34,7 @@ class FibonacciFragment : Fragment() {
         }*/
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,25 +46,48 @@ class FibonacciFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_fibonacci, container, false)
 
         val graph = view.graph as GraphView
-        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScalable(true)
+        graph.getViewport().setScalableY(true)
 
         val points = PointsOfMethods().getArray(FibonacciMethod { x: Double ->
             x.pow(2.0) + exp(-0.35 * x)
         })
-        var i = 0;
+        var i = 0
+        var firstPart = true
         for (point in points) {
-            val series =  PointsGraphSeries(arrayOf(point))
-            series.color = Color.rgb(
-                255,
-                255 * i / points.size,
-                255 * i / points.size
-            )
+            val series =  PointsGraphSeries(point)
+            if (firstPart)
+            {
+                series.color  = Color.rgb(255f * i / points.size,
+                    255f * i / points.size,
+                    128f + 127f * i / points.size)
+                i += 2
+            }
+            else
+            {
+                series.color  = Color.rgb(165f + 60f * i / points.size,
+                    42f + 183f * i / points.size,
+                    42f + 183f * i / points.size)
+                i -= 2
+            }
             series.setCustomShape(PointsGraphSeries.CustomShape { canvas, paint, x, y, dataPoint ->
                 paint.strokeWidth = 5F
                 canvas.drawCircle(x, y, 12F, paint)
             })
+            series.setOnDataPointTapListener { series, dataPoint ->
+                Toast.makeText(
+                    activity,
+                    "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
+                            "Mid\n x: ${point[1].x} \n y: ${point[1].y} \n" +
+                            "Right\n x: ${point[2].x} \n y: ${point[2].y} \n",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             graph.addSeries(series)
-            i++
+
+            if (2 * i > points.size) {
+                firstPart = false
+            }
         }
 
         val series2 = LineGraphSeries(

@@ -1,5 +1,9 @@
 package com.example.metopt.methods;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -28,13 +32,13 @@ public abstract class AbstractMethod {
         return function.apply(getAns());
     }
 
-    public List<Double> getAllIteration(double left, double right) {
+    public List<List<Double>> getAllIteration(double left, double right) {
         initialize(left, right);
-        List<Double> res = new ArrayList<>();
+        List<List<Double>> res = new ArrayList<>();
 
         while (cycleCondition()) {
             iterate();
-            res.add(getAns());
+            res.add(List.of(l, getAns(), r));
         }
 
         return res;
