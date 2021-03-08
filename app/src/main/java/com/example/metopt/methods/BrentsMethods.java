@@ -86,7 +86,7 @@ public class BrentsMethods extends AbstractMethod {
                 fv = fw;
                 fw = fu;
             } else {
-                if (fu <= fv || v == x || v == w){
+                if (fu <= fv || v == x || v == w) {
                     v = u;
                     fv = fu;
                 }

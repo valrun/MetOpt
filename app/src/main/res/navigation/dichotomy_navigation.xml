@@ -5,19 +5,17 @@
     android:id="@+id/dichotomy_navigation"
     app:startDestination="@id/dichotomyFragment"
     tools:ignore="UnusedNavigation">
-<fragment
-    android:id="@+id/dichotomyFragment"
-    android:name="com.example.metopt.fragments.dichotomyFragment"
-    android:label="dichotomyFragment"
-    tools:layout="@layout/fragment_dichotomy">
-    <action
-        android:id="@+id/action_dichotomy_to_new"
-        app:destination="@id/dichotomyFragment"
-        />
-    <argument
-        android:name="count"
-        android:defaultValue="0"
-        app:argType="string"
-        />
+    <fragment
+        android:id="@+id/dichotomyFragment"
+        android:name="com.example.metopt.fragments.dichotomyFragment"
+        android:label="dichotomyFragment"
+        tools:layout="@layout/fragment_dichotomy">
+        <action
+            android:id="@+id/action_dichotomy_to_new"
+            app:destination="@id/dichotomyFragment" />
+        <argument
+            android:name="count"
+            android:defaultValue="0"
+            app:argType="string" />
     </fragment>
 </navigation>

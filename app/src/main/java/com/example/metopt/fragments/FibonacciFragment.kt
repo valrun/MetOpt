@@ -10,15 +10,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.metopt.R
 import androidx.fragment.app.Fragment
-import com.example.metopt.methods.DichotomyMethod
 import com.example.metopt.methods.FibonacciMethod
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
-import kotlinx.android.synthetic.main.fragment_dichotomy.view.*
-import kotlinx.android.synthetic.main.fragment_fibonacci.view.*
 import kotlinx.android.synthetic.main.fragment_fibonacci.view.graph
 import kotlin.math.exp
 import kotlin.math.pow
@@ -40,9 +36,6 @@ class FibonacciFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /*if (FibonacciCount != null) {
-            FibonacciCount.text = (FibonacciCountNum).toString()
-        }*/
         val view = inflater.inflate(R.layout.fragment_fibonacci, container, false)
 
         val graph = view.graph as GraphView
@@ -55,30 +48,28 @@ class FibonacciFragment : Fragment() {
         var i = 0
         var firstPart = true
         for (point in points) {
-            val series =  PointsGraphSeries(point)
-            if (firstPart)
-            {
-                series.color  = Color.rgb(255f * i / points.size,
+            val series = PointsGraphSeries(point)
+            if (firstPart) {
+                series.color = Color.rgb(
                     255f * i / points.size,
-                    128f + 127f * i / points.size)
+                    255f * i / points.size,
+                    128f + 127f * i / points.size
+                )
                 i += 2
-            }
-            else
-            {
-                series.color  = Color.rgb(165f + 60f * i / points.size,
+            } else {
+                series.color = Color.rgb(
+                    165f + 60f * i / points.size,
                     42f + 183f * i / points.size,
-                    42f + 183f * i / points.size)
+                    42f + 183f * i / points.size
+                )
                 i -= 2
             }
-            series.setCustomShape(PointsGraphSeries.CustomShape { canvas, paint, x, y, dataPoint ->
-                paint.strokeWidth = 5F
-                canvas.drawCircle(x, y, 12F, paint)
-            })
+            series.size = 12f
             series.setOnDataPointTapListener { series, dataPoint ->
                 Toast.makeText(
                     activity,
                     "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
-                            "Mid\n x: ${point[1].x} \n y: ${point[1].y} \n" +
+                            "Current Answer\n x: ${point[1].x} \n y: ${point[1].y} \n" +
                             "Right\n x: ${point[2].x} \n y: ${point[2].y} \n",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -91,19 +82,13 @@ class FibonacciFragment : Fragment() {
         }
 
         val series2 = LineGraphSeries(
-            PointsOfMethods().getFunction()
+            PointsOfMethods().getFunction(-2.0, 3.0)
         )
         series2.color = Color.GRAY
         graph.addSeries(series2)
         return view
     }
 
-    /*
-    fun countClick(view: View) {
-        val FibonacciCountNum = FibonacciCount.text as Int
-        FibonacciCount.text = (FibonacciCountNum + 1).toString()
-    }
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val temp = FibonacciFragmentArgs.fromBundle(requireArguments()).count

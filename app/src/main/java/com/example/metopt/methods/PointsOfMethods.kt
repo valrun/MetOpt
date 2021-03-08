@@ -1,8 +1,8 @@
 package com.example.metopt.methods
 
-import android.graphics.Color
 import com.jjoe64.graphview.series.DataPoint
 import kotlin.math.exp
+import kotlin.math.floor
 import kotlin.math.pow
 
 class PointsOfMethods {
@@ -25,8 +25,9 @@ class PointsOfMethods {
         return dataPoints
     }
 
-    fun getFunction(): Array<DataPoint> {
-        val points = Array(5000) { i -> i * 0.001 - 2 }
+    fun getFunction(a: Double, b: Double): Array<DataPoint> {
+        val len = b - a
+        val points = Array(floor(len * 1000).toInt()) { i -> i * 0.001 + a }
         points.sort()
         var dataPoints = emptyArray<DataPoint>()
         for (x in points) {

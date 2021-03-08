@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_dichotomy.view.*
 import kotlin.math.exp
 import kotlin.math.pow
 
-
 class dichotomyFragment  : Fragment() {
     private var countValue = 0;
 
@@ -61,15 +60,12 @@ class dichotomyFragment  : Fragment() {
                     42f + 183f * i / points.size)
                 i -= 2
             }
-            series.setCustomShape(PointsGraphSeries.CustomShape { canvas, paint, x, y, dataPoint ->
-                paint.strokeWidth = 5F
-                canvas.drawCircle(x, y, 12F, paint)
-            })
+            series.size = 12f
             series.setOnDataPointTapListener { series, dataPoint ->
                 Toast.makeText(
                     activity,
                     "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
-                            "Mid\n x: ${point[1].x} \n y: ${point[1].y} \n" +
+                            "Current Answer\n x: ${point[1].x} \n y: ${point[1].y} \n" +
                             "Right\n x: ${point[2].x} \n y: ${point[2].y} \n",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -82,7 +78,7 @@ class dichotomyFragment  : Fragment() {
         }
 
         val series2 = LineGraphSeries(
-            PointsOfMethods().getFunction()
+            PointsOfMethods().getFunction(-2.0, 3.0)
         )
         series2.color = Color.GRAY
         series2.title = "function"

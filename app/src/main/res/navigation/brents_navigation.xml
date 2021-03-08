@@ -5,19 +5,17 @@
     android:id="@+id/brents_navigation"
     app:startDestination="@id/brentsFragment"
     tools:ignore="UnusedNavigation">
-<fragment
-    android:id="@+id/brentsFragment"
-    android:name="com.example.metopt.fragments.BrentsFragment"
-    android:label="BrentsFragment"
-    tools:layout="@layout/fragment_brents">
-    <action
-        android:id="@+id/action_home_to_new"
-        app:destination="@id/brentsFragment"
-        />
-    <argument
-        android:name="count"
-        android:defaultValue="0"
-        app:argType="string"
-        />
+    <fragment
+        android:id="@+id/brentsFragment"
+        android:name="com.example.metopt.fragments.BrentsFragment"
+        android:label="BrentsFragment"
+        tools:layout="@layout/fragment_brents">
+        <action
+            android:id="@+id/action_home_to_new"
+            app:destination="@id/brentsFragment" />
+        <argument
+            android:name="count"
+            android:defaultValue="0"
+            app:argType="string" />
     </fragment>
 </navigation>

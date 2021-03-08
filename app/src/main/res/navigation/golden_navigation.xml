@@ -5,19 +5,17 @@
     android:id="@+id/Golden_navigation"
     app:startDestination="@id/GoldenFragment"
     tools:ignore="UnusedNavigation">
-<fragment
-    android:id="@+id/GoldenFragment"
-    android:name="com.example.metopt.fragments.GoldenFragment"
-    android:label="GoldenFragment"
-    tools:layout="@layout/fragment_golden">
-    <action
-        android:id="@+id/action_gold_to_new"
-        app:destination="@id/GoldenFragment"
-        />
-    <argument
-        android:name="count"
-        android:defaultValue="0"
-        app:argType="string"
-        />
+    <fragment
+        android:id="@+id/GoldenFragment"
+        android:name="com.example.metopt.fragments.GoldenFragment"
+        android:label="GoldenFragment"
+        tools:layout="@layout/fragment_golden">
+        <action
+            android:id="@+id/action_gold_to_new"
+            app:destination="@id/GoldenFragment" />
+        <argument
+            android:name="count"
+            android:defaultValue="0"
+            app:argType="string" />
     </fragment>
 </navigation>

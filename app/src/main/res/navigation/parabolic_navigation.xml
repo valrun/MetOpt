@@ -5,19 +5,17 @@
     android:id="@+id/Parabolic_navigation"
     app:startDestination="@id/ParabolicFragment"
     tools:ignore="UnusedNavigation">
-<fragment
-    android:id="@+id/ParabolicFragment"
-    android:name="com.example.metopt.fragments.ParabolicFragment"
-    android:label="ParabolicFragment"
-    tools:layout="@layout/fragment_parabolic">
-    <action
-        android:id="@+id/action_gold_to_new"
-        app:destination="@id/ParabolicFragment"
-        />
-    <argument
-        android:name="count"
-        android:defaultValue="0"
-        app:argType="string"
-        />
+    <fragment
+        android:id="@+id/ParabolicFragment"
+        android:name="com.example.metopt.fragments.ParabolicFragment"
+        android:label="ParabolicFragment"
+        tools:layout="@layout/fragment_parabolic">
+        <action
+            android:id="@+id/action_gold_to_new"
+            app:destination="@id/ParabolicFragment" />
+        <argument
+            android:name="count"
+            android:defaultValue="0"
+            app:argType="string" />
     </fragment>
 </navigation>
