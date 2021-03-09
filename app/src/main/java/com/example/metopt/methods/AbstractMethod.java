@@ -1,9 +1,5 @@
 package com.example.metopt.methods;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;

@@ -39,6 +39,12 @@ class ParabolicFragment : Fragment() {
         graph.getViewport().setScalable(true)
         graph.getViewport().setScalableY(true)
 
+        val series2 = LineGraphSeries(
+            PointsOfMethods().getFunction(-2.0, 3.0)
+        )
+        series2.color = Color.GRAY
+        graph.addSeries(series2)
+
         val points = PointsOfMethods().getArray(ParabolicMethod { x: Double ->
             x.pow(2.0) + exp(-0.35 * x)
         })
@@ -73,16 +79,18 @@ class ParabolicFragment : Fragment() {
             }
             graph.addSeries(series)
 
+            val series3 = LineGraphSeries(
+                PointsOfMethods().getParabole(point)
+            )
+            series3.color = series.color
+            graph.addSeries(series3)
+
             if (2 * i > points.size) {
                 firstPart = false
             }
         }
 
-        val series2 = LineGraphSeries(
-            PointsOfMethods().getFunction(-2.0, 3.0)
-        )
-        series2.color = Color.GRAY
-        graph.addSeries(series2)
+
 
         return view
     }

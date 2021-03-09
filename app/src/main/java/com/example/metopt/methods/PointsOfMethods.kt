@@ -38,4 +38,26 @@ class PointsOfMethods {
         return dataPoints
     }
 
+    fun getParabole(points: Array<DataPoint>): Array<DataPoint> {
+        if (points.size != 3) {
+            return emptyArray()
+        }
+        val k = (points[0].y - points[2].y) / (points[0].x - points[2].x).pow(2.0)
+        val y0 = points[2].y
+        val x0 = points[2].x
+
+        val a = -2.0
+        val b = 3.0
+        val len = b - a
+        val newPoints = Array(floor(len * 1000).toInt()) { i -> i * 0.001 + a }
+        newPoints.sort()
+        var dataPoints = emptyArray<DataPoint>()
+        for (x in newPoints) {
+            val y = k * (x - x0).pow(2.0) + y0
+            dataPoints += DataPoint(x, y)
+        }
+
+        return dataPoints
+    }
+
 }

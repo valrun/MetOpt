@@ -65,7 +65,7 @@ class GoldenFragment : Fragment() {
             series.setOnDataPointTapListener { series, dataPoint ->
                 Toast.makeText(
                     activity,
-                    "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
+                            "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
                             "Current Answer\n x: ${point[1].x} \n y: ${point[1].y} \n" +
                             "Right\n x: ${point[2].x} \n y: ${point[2].y} \n",
                     Toast.LENGTH_SHORT
