@@ -27,7 +27,8 @@ class PointsOfMethods {
 
     fun getFunction(a: Double, b: Double): Array<DataPoint> {
         val len = b - a
-        val points = Array(floor(len * 1000).toInt()) { i -> i * 0.001 + a }
+        val del = 1000.0
+        val points = Array(floor(len * del).toInt()) { i -> i / del + a }
         points.sort()
         var dataPoints = emptyArray<DataPoint>()
         for (x in points) {
@@ -42,18 +43,23 @@ class PointsOfMethods {
         if (points.size != 3) {
             return emptyArray()
         }
-        val k = (points[0].y - points[2].y) / (points[0].x - points[2].x).pow(2.0)
-        val y0 = points[2].y
-        val x0 = points[2].x
+         val x1 = points[0].x; val x2 = points[2].x; val x3 = points[1].x
+         val fx1 = points[0].y; val fx2 = points[2].y; val fx3 = points[1].y
+
+        val a0 = fx1;
+        val a1 = (fx2 - fx1) / (x2 - x1);
+        val a2 = 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
 
         val a = -2.0
         val b = 3.0
         val len = b - a
-        val newPoints = Array(floor(len * 1000).toInt()) { i -> i * 0.001 + a }
+        val del = 200.0
+
+        val newPoints = Array(floor(len * del).toInt()) { i -> i / del + a }
         newPoints.sort()
         var dataPoints = emptyArray<DataPoint>()
         for (x in newPoints) {
-            val y = k * (x - x0).pow(2.0) + y0
+            val y = a2 * x.pow(2.0) + a1 * x + a0
             dataPoints += DataPoint(x, y)
         }
 
