@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.metopt.R
 import com.example.metopt.methods.ParabolicMethod
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
 import kotlinx.android.synthetic.main.fragment_parabolic.view.graph
@@ -20,30 +22,22 @@ import kotlin.math.exp
 import kotlin.math.pow
 
 class ParabolicFragment : Fragment() {
-    private var countValue = 0;
+    var pointsSeries: Array<PointsGraphSeries<DataPoint>> = arrayOf()
+    var paraboleSeries: Array<LineGraphSeries<DataPoint>> = arrayOf()
+    lateinit var functionSeries : LineGraphSeries<DataPoint>
+    lateinit var graph: GraphView
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-    }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_parabolic, container, false)
-
-        val graph = view.graph as GraphView
-        graph.getViewport().setScalable(true)
-        graph.getViewport().setScalableY(true)
-
-        val series2 = LineGraphSeries(
+        //FUNCTION
+        functionSeries = LineGraphSeries(
             PointsOfMethods().getFunction(-2.0, 3.0)
         )
-        series2.color = Color.GRAY
-        graph.addSeries(series2)
+        functionSeries.color = Color.GRAY
 
         val points = PointsOfMethods().getArray(ParabolicMethod { x: Double ->
             x.pow(2.0) + exp(-0.35 * x)
@@ -77,28 +71,52 @@ class ParabolicFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            graph.addSeries(series)
+            pointsSeries += series
 
             val series3 = LineGraphSeries(
                 PointsOfMethods().getParabole(point)
             )
             series3.color = series.color
-            graph.addSeries(series3)
+            paraboleSeries += series3
 
             if (2 * i > points.size) {
                 firstPart = false
             }
         }
-
-
-
-        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val temp = ParabolicFragmentArgs.fromBundle(requireArguments()).count
-        //homeCount.text = temp
-        countValue = temp.toInt()
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_parabolic, container, false)
+
+        //BUTTON
+        val prevButton: AppCompatButton = view.findViewById<View>(R.id.prev) as AppCompatButton
+        prevButton.setOnClickListener {
+            val last = graph.series.size - 1
+            if (last > 1) {
+                graph.removeSeries(graph.series[last])
+                graph.removeSeries(graph.series[last - 1])
+            }
+        }
+
+        val nextButton: AppCompatButton = view.findViewById<View>(R.id.next) as AppCompatButton
+        nextButton.setOnClickListener {
+            val last = (graph.series.size - 1) / 2
+            if (last < pointsSeries.size) {
+                graph.addSeries(pointsSeries[last])
+                graph.addSeries(paraboleSeries[last])
+            }
+        }
+
+        graph = view.graph as GraphView
+        graph.viewport.isScalable = true
+        graph.viewport.setScalableY(true)
+        graph.addSeries(functionSeries)
+
+        return view
     }
 }

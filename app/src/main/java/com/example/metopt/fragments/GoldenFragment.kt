@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.metopt.R
 import com.example.metopt.methods.GoldenRatioMethod
 import com.example.metopt.methods.PointsOfMethods
 import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
 import kotlinx.android.synthetic.main.fragment_golden.view.graph
@@ -20,24 +22,20 @@ import kotlin.math.exp
 import kotlin.math.pow
 
 class GoldenFragment : Fragment() {
-    private var countValue = 0;
+    var pointsSeries: Array<PointsGraphSeries<DataPoint>> = arrayOf()
+    lateinit var functionSeries : LineGraphSeries<DataPoint>
+    lateinit var graph: GraphView
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-    }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_golden, container, false)
-
-        val graph = view.graph as GraphView
-        graph.getViewport().setScalable(true)
-        graph.getViewport().setScalableY(true)
+        //FUNCTION
+        functionSeries = LineGraphSeries(
+            PointsOfMethods().getFunction(-2.0, 3.0)
+        )
+        functionSeries.color = Color.GRAY
 
         val points = PointsOfMethods().getArray(GoldenRatioMethod { x: Double ->
             x.pow(2.0) + exp(-0.35 * x)
@@ -65,32 +63,51 @@ class GoldenFragment : Fragment() {
             series.setOnDataPointTapListener { series, dataPoint ->
                 Toast.makeText(
                     activity,
-                            "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
+                    "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
                             "Current Answer\n x: ${point[1].x} \n y: ${point[1].y} \n" +
                             "Right\n x: ${point[2].x} \n y: ${point[2].y} \n",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            graph.addSeries(series)
+            //graph.addSeries(series)
+            pointsSeries += series
 
             if (2 * i > points.size) {
                 firstPart = false
             }
         }
-
-        val series2 = LineGraphSeries(
-            PointsOfMethods().getFunction(-2.0, 3.0)
-        )
-        series2.color = Color.GRAY
-        graph.addSeries(series2)
-
-        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val temp = GoldenFragmentArgs.fromBundle(requireArguments()).count
-        //homeCount.text = temp
-        countValue = temp.toInt()
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_golden, container, false)
+
+        //BUTTON
+        val prevButton: AppCompatButton = view.findViewById<View>(R.id.prev) as AppCompatButton
+        prevButton.setOnClickListener {
+            val last = graph.series.size - 1
+            if (last > 0) {
+                graph.removeSeries(graph.series[last])
+            }
+        }
+
+        val nextButton: AppCompatButton = view.findViewById<View>(R.id.next) as AppCompatButton
+        nextButton.setOnClickListener {
+            val last = graph.series.size - 1
+            if (last < pointsSeries.size) {
+                graph.addSeries(pointsSeries[last])
+            }
+        }
+
+        graph = view.graph as GraphView
+        graph.viewport.isScalable = true
+        graph.viewport.setScalableY(true)
+        graph.addSeries(functionSeries)
+
+        return view
     }
 }

@@ -50,8 +50,10 @@ class PointsOfMethods {
         val a1 = (fx2 - fx1) / (x2 - x1);
         val a2 = 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
 
-        val a = -2.0
-        val b = 3.0
+
+        val a = -2.0; val b = 3.0
+        //val a = x1; val b = x2
+
         val len = b - a
         val del = 200.0
 
