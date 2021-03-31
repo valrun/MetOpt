@@ -46,9 +46,12 @@ class PointsOfMethods {
          val x1 = points[0].x; val x2 = points[2].x; val x3 = points[1].x
          val fx1 = points[0].y; val fx2 = points[2].y; val fx3 = points[1].y
 
-        val a0 = fx1;
-        val a1 = (fx2 - fx1) / (x2 - x1);
-        val a2 = 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
+//        val a0 = fx1;
+//        val a1 = (fx2 - fx1) / (x2 - x1);
+//        val a2 = 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
+        val a2 = (((fx3 - fx2) * (x1 - x3) / (x3 - x2)) + fx3 - fx1) / (- x1 * x1 + (x2 + x3) * (x1 - x3) + x3 * x3)
+        val a1 = (fx3 - fx2 + a2 * (x2 * x2 - x3 * x3)) / (x3 - x2)
+        val a0 = fx3 - a2 * x3 * x3 - a1 * x3
 
 
         val a = -2.0; val b = 3.0

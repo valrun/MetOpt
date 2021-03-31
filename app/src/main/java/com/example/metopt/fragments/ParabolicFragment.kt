@@ -62,7 +62,7 @@ class ParabolicFragment : Fragment() {
                 i -= 2
             }
             series.size = 12f
-            series.setOnDataPointTapListener { series, dataPoint ->
+            series.setOnDataPointTapListener { series, _ ->
                 Toast.makeText(
                     activity,
                     "Left\n x: ${point[0].x} \n y: ${point[0].y} \n" +
